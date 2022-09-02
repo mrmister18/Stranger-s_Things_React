@@ -1,0 +1,16 @@
+span {
+    margin: 5px;
+}
+
+.title {
+    font-size: xx-large;
+}
+
+nav {
+    background-color: salmon;
+    text-align: right;
+}
+/* 
+* {
+    background-color: black;
+} */
