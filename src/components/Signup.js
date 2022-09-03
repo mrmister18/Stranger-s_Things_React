@@ -7,7 +7,9 @@ const Signup = () => {
 
     return <div className="signup">
         <h1>Sign up</h1>
-        <form>
+        <form onSubmit={(event) => {
+            event.preventDefault()
+        console.log(newUserName, newPassword)}}>
             <label htmlFor='username'>Username</label>
             <input onChange={(event) => setNewUserName(event.target.value)} id='username' name='username'type="text"></input>
             <label htmlFor='password'>Password</label>
