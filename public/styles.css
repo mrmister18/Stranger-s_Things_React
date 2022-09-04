@@ -4,13 +4,15 @@ span {
 
 .title {
     font-size: xx-large;
+    text-align: center;
 }
 
 nav {
     background-color: salmon;
     text-align: right;
 }
-/* 
-* {
-    background-color: black;
-} */
+
+.post {
+    margin: 5px;
+    border: 2px solid black;
+}

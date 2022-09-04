@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 
-const Home = () => {
+const Home = (props) => {
     const [posts, setPosts] = useState([])
+    const { loginToken } = props
 
     async function fetchPosts() {
         try {const response = await fetch('https://strangers-things.herokuapp.com/api/2206-ftb-pt-web-pt/posts')
@@ -16,8 +17,10 @@ const Home = () => {
 
     useEffect(() => {fetchPosts()}, [])
     return <div className='posts'>
+        <h1 className='title'>Home</h1>
+        {loginToken ? <h1>Logged in</h1> : null}
         {posts.map((post) => {
-            return <div className='post' key={post.id}>
+            return <div className='post' key={post._id}>
                 <h2>{post.title}</h2>
                 <p>{post.description}</p>
                 <p>{post.price}</p>
