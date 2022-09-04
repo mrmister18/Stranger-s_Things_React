@@ -5,6 +5,7 @@ import Login from "./components/Login"
 import Signup from "./components/Signup"
 import Home from "./components/Home";
 import Profile from "./components/Profile";
+import Addpost from "./components/Addpost";
 
 const Nav = (props) => {
     const { loginToken, setLoginToken } = props
@@ -27,6 +28,7 @@ const App = () => {
             <Route path="/account/login" element={<><Nav /><Login setLoginToken={setLoginToken} loginToken={loginToken} /></>}></Route>
             <Route path="/account/signup" element={<><Nav /><Signup setLoginToken={setLoginToken} loginToken={loginToken} /></>}></Route>
             <Route path="/account/profile" element={<><Nav loginToken={loginToken} setLoginToken={setLoginToken} /><Profile loginToken={loginToken} /></>}></Route>
+            <Route path="/addpost" element={<><Nav /><Addpost /></>}></Route>
         </Routes>
     </div>
     </BrowserRouter>

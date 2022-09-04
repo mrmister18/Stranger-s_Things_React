@@ -18,8 +18,20 @@ const Profile = (props) => {
   .catch(console.error);
     }
 
+    async function fetchUserPosts() {
+      fetch('https://strangers-things.herokuapp.com/api/2206-ftb-pt-web-pt/users/me', {
+headers: {
+  'Content-Type': 'application/json',
+  'Authorization': `Bearer ${loginToken}`
+},
+}).then(response => response.json())
+.then(result => {
+  setMyPosts(result.data.messages);
+})
+.catch(console.error);
+  }
+
     useEffect(() => {fetchMessages()}, [])
-    console.log(messages)
     return <div className='profile'>
         <h1 className="messages">Messages</h1>
         {messages.length ? messages.map((message) => {
@@ -30,6 +42,14 @@ const Profile = (props) => {
             </div>
         }) : <h2>You have no messages</h2>}
         <div className="myposts">My Posts</div>
+        {myPosts.length ? myPosts.map((post) => {
+            <div className="message" key={post._id}>
+                <h2>{post.title}</h2>
+                <h3>{post.description}</h3>
+                <p>{post.price}</p>
+                <p>{post.location}</p>
+            </div>
+        }) : <h2>You have no posts</h2>}
     </div>
 }
 
