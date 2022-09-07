@@ -1,11 +1,7 @@
 import { createRoot } from "react-dom/client"
 import { Link, Route, Routes, BrowserRouter, useParams } from "react-router-dom"
 import React, { useState, useEffect } from 'react';
-import Login from "./components/Login"
-import Signup from "./components/Signup"
-import Home from "./components/Home";
-import Profile from "./components/Profile";
-import Addpost from "./components/Addpost";
+import { Addpost, Editpost, Home, Login, Profile, Signup } from './components'
 
 const Nav = (props) => {
     const { loginToken, setLoginToken } = props

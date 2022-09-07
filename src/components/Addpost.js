@@ -22,7 +22,7 @@ const Addpost = (props) => {
               post: {
                 title: title,
                 description: description,
-                price: price,
+                price: '$' + price,
                 location: location,
                 willDeliver: willDeliver
               }
@@ -43,7 +43,7 @@ const Addpost = (props) => {
               post: {
                 title: title,
                 description: description,
-                price: price,
+                price: '$' + price,
                 willDeliver: willDeliver
               }
             })
@@ -65,7 +65,7 @@ const Addpost = (props) => {
         <label htmlFor='description'>Description</label>
         <input onChange={(event) => setDescription(event.target.value)} id='description' required></input><br />
         <label htmlFor='price'>Price</label>
-        <input onChange={(event) => setPrice(event.target.value)} id='price' required></input><br />
+        <input onChange={(event) => setPrice(event.target.value)} id='price' type='number' minValue='0' required></input><br />
         <label htmlFor='location'>Location</label>
         <input onChange={(event) => setLocation(event.target.value)} id='location'></input><span>(optional)</span><br />
         <label htmlFor='deliver'>Willing to deliver?</label>
