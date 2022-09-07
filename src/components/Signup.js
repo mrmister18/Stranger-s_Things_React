@@ -31,7 +31,6 @@ const Signup = (props) => {
         <form onSubmit={(event) => {
             event.preventDefault()
         registerNewUser(newUserName, newPassword)
-        console.log(loginToken)
         loginToken ? navigate("/") : alert("Signup Failed", "Please try again")}}>
             <label htmlFor='username'>Username</label>
             <input onChange={(event) => setNewUserName(event.target.value)} id='username' name='username'type="text"></input>

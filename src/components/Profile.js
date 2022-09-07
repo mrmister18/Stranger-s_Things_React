@@ -13,7 +13,7 @@ const Profile = (props) => {
   },
 }).then(response => response.json())
   .then(result => {
-    setMessages(result.data.posts);
+    setMyPosts(result.data.posts);
   })
   .catch(console.error);
     }
@@ -35,15 +35,15 @@ headers: {
     return <div className='profile'>
         <h1 className="messages">Messages</h1>
         {messages.length ? messages.map((message) => {
-            <div className="message" key={message._id}>
+            return <div className="message" key={message._id}>
                 <h2>From: {message.fromUser.username}</h2>
                 <h3>{message.post.title}</h3>
                 <p>{message.content}</p>
             </div>
         }) : <h2>You have no messages</h2>}
-        <div className="myposts">My Posts</div>
+        <h1 className="myposts">My Posts</h1>
         {myPosts.length ? myPosts.map((post) => {
-            <div className="message" key={post._id}>
+            return <div className="message" key={post._id}>
                 <h2>{post.title}</h2>
                 <h3>{post.description}</h3>
                 <p>{post.price}</p>

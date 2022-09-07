@@ -20,15 +20,27 @@ const Nav = (props) => {
 
 const App = () => {
     const [loginToken, setLoginToken] = useState("")
+    const [posts, setPosts] = useState([])
+
+    async function fetchPosts() {
+        try {const response = await fetch('https://strangers-things.herokuapp.com/api/2206-ftb-pt-web-pt/posts')
+            const data = await response.json()
+            const posts = data.data.posts
+            setPosts(posts)
+            }
+        catch (err) {
+          throw err
+        }
+      }
 
     return <BrowserRouter>
     <div>
         <Routes>
-            <Route path="/" element={<><Nav loginToken={loginToken} setLoginToken={setLoginToken} /><Home loginToken={loginToken} /></>}></Route>
+            <Route path="/" element={<><Nav loginToken={loginToken} setLoginToken={setLoginToken} /><Home posts={posts} loginToken={loginToken} fetchPosts={fetchPosts} /></>}></Route>
             <Route path="/account/login" element={<><Nav /><Login setLoginToken={setLoginToken} loginToken={loginToken} /></>}></Route>
             <Route path="/account/signup" element={<><Nav /><Signup setLoginToken={setLoginToken} loginToken={loginToken} /></>}></Route>
             <Route path="/account/profile" element={<><Nav loginToken={loginToken} setLoginToken={setLoginToken} /><Profile loginToken={loginToken} /></>}></Route>
-            <Route path="/addpost" element={<><Nav /><Addpost /></>}></Route>
+            <Route path="/addpost" element={<><Nav loginToken={loginToken} setLoginToken={setLoginToken} /><Addpost loginToken={loginToken} /></>}></Route>
         </Routes>
     </div>
     </BrowserRouter>

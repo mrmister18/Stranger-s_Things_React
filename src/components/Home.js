@@ -2,20 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom'
 
 const Home = (props) => {
-    const [posts, setPosts] = useState([])
-    const { loginToken } = props
+    const { loginToken, posts, fetchPosts } = props
     const navigate = useNavigate()
-
-    async function fetchPosts() {
-        try {const response = await fetch('https://strangers-things.herokuapp.com/api/2206-ftb-pt-web-pt/posts')
-            const data = await response.json()
-            const posts = data.data.posts
-            setPosts(posts)
-            }
-        catch (err) {
-          throw err
-        }
-      }
 
     useEffect(() => {fetchPosts()}, [])
     return <div className='posts'>
@@ -30,6 +18,7 @@ const Home = (props) => {
                 <p>{post.price}</p>
                 <p>{post.author.username}</p>
                 <p>{post.location}</p>
+                <p>{post.willDeliver ? "Will Deliver" : "Will not Deliver"}</p>
             </div>
         })}
     </div>
