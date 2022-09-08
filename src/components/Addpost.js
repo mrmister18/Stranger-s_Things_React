@@ -2,13 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
 
 const Addpost = (props) => {
-    const [title, setTitle] = useState("")
-    const [description, setDescription] = useState("")
-    const [price, setPrice] = useState("")
-    const [location, setLocation] = useState("")
-    const [willDeliver, setWillDeliver] = useState(false)
     const [newPost, setNewPost] = useState({})
-    const { loginToken } = props
+    const { loginToken, title, setTitle, description, setDescription, price, setPrice, location, setLocation, willDeliver, setWillDeliver } = props
     const navigate = useNavigate()
 
     const createNewPost = () => {
@@ -61,11 +56,11 @@ const Addpost = (props) => {
         title && description && price ? createNewPost() : alert("Please fill out all required fields")
         newPost ? navigate("/") : null}}>
         <label htmlFor='title'>Title</label>
-        <input onChange={(event) => setTitle(event.target.value)} id='title' required></input><br />
+        <input onChange={(event) => setTitle(event.target.value)} id='title' required></input>*<br />
         <label htmlFor='description'>Description</label>
-        <input onChange={(event) => setDescription(event.target.value)} id='description' required></input><br />
+        <input onChange={(event) => setDescription(event.target.value)} id='description' required></input>*<br />
         <label htmlFor='price'>Price</label>
-        <input onChange={(event) => setPrice(event.target.value)} id='price' type='number' minValue='0' required></input><br />
+        <input onChange={(event) => setPrice(event.target.value)} id='price' type='number' minValue='0' required></input>*<br />
         <label htmlFor='location'>Location</label>
         <input onChange={(event) => setLocation(event.target.value)} id='location'></input><span>(optional)</span><br />
         <label htmlFor='deliver'>Willing to deliver?</label>

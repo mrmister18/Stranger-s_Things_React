@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 
 const Home = (props) => {
     const { loginToken, posts, fetchPosts } = props
@@ -19,6 +19,7 @@ const Home = (props) => {
                 <p>{post.author.username}</p>
                 <p>{post.location}</p>
                 <p>{post.willDeliver ? "Will Deliver" : "Will not Deliver"}</p>
+                <Link to={post._id}><button>Edit Post</button></Link>
             </div>
         })}
     </div>

@@ -33,9 +33,9 @@ const Signup = (props) => {
         registerNewUser(newUserName, newPassword)
         loginToken ? navigate("/") : alert("Signup Failed", "Please try again")}}>
             <label htmlFor='username'>Username</label>
-            <input onChange={(event) => setNewUserName(event.target.value)} id='username' name='username'type="text"></input>
+            <input onChange={(event) => setNewUserName(event.target.value)} id='username' placeholder='username' name='username'type="text"></input>
             <label htmlFor='password'>Password</label>
-            <input onChange={(event) => setNewPassword(event.target.value)} id='password' name='password' type="password"></input>
+            <input onChange={(event) => setNewPassword(event.target.value)} id='password' placeholder='password' name='password' type="password"></input>
             <button>Register</button>
         </form>
     </div>

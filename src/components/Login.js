@@ -33,9 +33,9 @@ const Login = (props) => {
             userLogin(userName, password)
             loginToken ? navigate("/") : alert("Login Failed! Please try again")}}>
             <label htmlFor='username'>Username</label>
-            <input onChange={(event) => setUserName(event.target.value)} id='username' name='username'type="text" required></input>
+            <input onChange={(event) => setUserName(event.target.value)} id='username' name='username'type="text" placeholder='username' required></input>
             <label htmlFor='password'>Password</label>
-            <input onChange={(event) => setPassword(event.target.value)}id='password' name='password' type="password" required></input>
+            <input onChange={(event) => setPassword(event.target.value)}id='password' name='password' type="password" placeholder='password' required></input>
             <button>Login</button>
         </form>
         <Link to="/account/signup"><p>Don't have an account? Sign up!</p></Link>
