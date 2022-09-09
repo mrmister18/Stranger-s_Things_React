@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 const Profile = (props) => {
     const [messages, setMessages] = useState([])
     const [myPosts, setMyPosts] = useState([])
-    const { loginToken, title, setTitle, description, setDescription, price, setPrice, location, setLocation, willDeliver, setWillDeliver } = props
+    const { loginToken, setPostId, postId, title, setTitle, description, setDescription, price, setPrice, location, setLocation, willDeliver, setWillDeliver } = props
 
     async function fetchMessages() {
         fetch('https://strangers-things.herokuapp.com/api/2206-ftb-pt-web-pt/users/me', {
@@ -45,21 +45,21 @@ headers: {
         }) : <h2>You have no messages</h2>}
         <h1 className="myposts">My Posts</h1>
         {myPosts.length ? myPosts.map((post) => {
-            return <div className="message" key={post._id}>
+          if (post.active) {return <div className="post" key={post._id}>
                 <h2>{post.title}</h2>
                 <h3>{post.description}</h3>
                 <p>{post.price}</p>
                 <p>{post.location}</p>
                 <p>{post.willDeliver ? "Will Deliver" : "Will not Deliver"}</p>
                 <Link to={`/${post._id}`}><button onClick={() => {
-                  console.log(props)
                   setTitle(post.title)
                   setDescription(post.description)
                   setPrice(post.price)
                   setLocation(post.location)
                   setWillDeliver(post.willDeliver)
+                  setPostId(post._id)
                 }}>Edit Post</button></Link>
-            </div>
+            </div>}
         }) : <h2>You have no posts</h2>}
     </div>
 }
