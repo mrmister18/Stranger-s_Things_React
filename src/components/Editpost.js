@@ -62,6 +62,7 @@ return <div className='editpost'>
         <button>Update Post</button>
         </form>
         <button onClick={() => {deletePost()
+        fetchPosts()
         navigate('/account/profile')}}>DELETE</button>
     </div> 
 }

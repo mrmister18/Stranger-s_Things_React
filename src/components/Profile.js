@@ -51,7 +51,7 @@ headers: {
                 <p>{post.price}</p>
                 <p>{post.location}</p>
                 <p>{post.willDeliver ? "Will Deliver" : "Will not Deliver"}</p>
-                <Link to={`/${post._id}`}><button onClick={() => {
+                <Link to={`/post/${post._id}`}><button onClick={() => {
                   setTitle(post.title)
                   setDescription(post.description)
                   setPrice(post.price)

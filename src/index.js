@@ -26,25 +26,38 @@ const App = () => {
     const { postid } = useParams()
 
     async function fetchPosts() {
-        try {const response = await fetch('https://strangers-things.herokuapp.com/api/2206-ftb-pt-web-pt/posts')
+        if (loginToken) {
+            fetch('https://strangers-things.herokuapp.com/api/2206-ftb-pt-web-pt/posts/', {
+  headers: {
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${loginToken}`
+  },
+}).then(response => response.json())
+  .then(result => {
+    setPosts(result.data.posts);
+  })
+  .catch(console.error);
+        }
+        else {try {const response = await fetch('https://strangers-things.herokuapp.com/api/2206-ftb-pt-web-pt/posts')
             const data = await response.json()
             const posts = data.data.posts
             setPosts(posts)
             }
         catch (err) {
           throw err
-        }
+        }}
       }
 
     return <BrowserRouter>
     <div>
         <Routes>
-            <Route path="/" element={<><Nav loginToken={loginToken} setLoginToken={setLoginToken} /><Home posts={posts} loginToken={loginToken} fetchPosts={fetchPosts} /></>}></Route>
+            <Route path="/" element={<><Nav loginToken={loginToken} setLoginToken={setLoginToken} /><Home posts={posts} loginToken={loginToken} fetchPosts={fetchPosts} setTitle={setTitle} setPrice={setPrice} setLocation={setLocation} setDescription={setDescription} setWillDeliver={setWillDeliver} /></>}></Route>
             <Route path="/account/login" element={<><Nav /><Login setLoginToken={setLoginToken} loginToken={loginToken} /></>}></Route>
             <Route path="/account/signup" element={<><Nav /><Signup setLoginToken={setLoginToken} loginToken={loginToken} /></>}></Route>
             <Route path="/account/profile" element={<><Nav loginToken={loginToken} setLoginToken={setLoginToken}  /><Profile setPostId={setPostId} postId={postId} loginToken={loginToken} title={title} setTitle={setTitle} description={description} setDescription={setDescription} price={price} setPrice={setPrice} willDeliver={willDeliver} setWillDeliver={setWillDeliver} location={location} setLocation={setLocation} /></>}></Route>
             <Route path="/addpost" element={<><Nav loginToken={loginToken} setLoginToken={setLoginToken} /><Addpost fetchPosts={fetchPosts} title={title} setTitle={setTitle} description={description} setDescription={setDescription} price={price} setPrice={setPrice} willDeliver={willDeliver} setWillDeliver={setWillDeliver} location={location} setLocation={setLocation} loginToken={loginToken} /></>}></Route>
-            <Route path="/:postid" element={<><Nav loginToken={loginToken} setLoginToken={setLoginToken}/><Editpost fetchPosts={fetchPosts} loginToken={loginToken} postId={postId} title={title} setTitle={setTitle} description={description} setDescription={setDescription} price={price} setPrice={setPrice} willDeliver={willDeliver} setWillDeliver={setWillDeliver} location={location} setLocation={setLocation} /></>}></Route>
+            <Route path="/post/:postid" element={<><Nav loginToken={loginToken} setLoginToken={setLoginToken}/><Editpost fetchPosts={fetchPosts} loginToken={loginToken} postId={postId} title={title} setTitle={setTitle} description={description} setDescription={setDescription} price={price} setPrice={setPrice} willDeliver={willDeliver} setWillDeliver={setWillDeliver} location={location} setLocation={setLocation} /></>}></Route>
+            {/* <Route path="/message/:postid" element={<><Nav loginToken={loginToken} setLoginToken={setLoginToken} /><Message /></>}></Route> */}
         </Routes>
     </div>
     </BrowserRouter>
