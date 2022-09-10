@@ -22,6 +22,7 @@ const Login = (props) => {
       }).then(response => response.json())
         .then(result => {
           setLoginToken(result.data.token);
+          navigate('/')
         })
         .catch(console.error);
       }
@@ -30,8 +31,7 @@ const Login = (props) => {
         <h1>Login</h1>
         <form onSubmit={(event) => {
             event.preventDefault()
-            userLogin(userName, password)
-            loginToken ? navigate("/") : alert("Login Failed! Please try again")}}>
+            userLogin(userName, password)}}>
             <label htmlFor='username'>Username</label>
             <input onChange={(event) => setUserName(event.target.value)} id='username' name='username'type="text" placeholder='username' required></input>
             <label htmlFor='password'>Password</label>

@@ -9,13 +9,12 @@ const Nav = (props) => {
     return <nav>
     <span className="title">Stranger's Things</span>
     <Link to="/"><span>Home</span></Link>
-    {loginToken ? <Link to={"/account/profile"}><span>Profile</span></Link> : null}
-    {loginToken ? <button onClick={() => setLoginToken("")}>Log out</button> : <Link to="/account/login"><span>Login</span></Link>}
+    {loginToken ? <><Link to={"/account/profile"}><span>Profile</span></Link><Link to='/'><span onClick={() => setLoginToken("")}>Log out</span></Link></> : <><Link to="/account/login"><span>Login</span></Link><Link to="/account/signup"><span>Register</span></Link></>}
 </nav>
 }
 
 const App = () => {
-    const [loginToken, setLoginToken] = useState("")
+    const [loginToken, setLoginToken] = useState(window.localStorage.getItem('loginToken') || "")
     const [posts, setPosts] = useState([])
     const [title, setTitle] = useState("")
     const [description, setDescription] = useState("")
@@ -25,6 +24,8 @@ const App = () => {
     const [postId, setPostId] = useState("")
     const [postUser, setPostUser] = useState("")
     const { postid } = useParams()
+
+    useEffect(() => {window.localStorage.setItem('loginToken', loginToken)}, [loginToken])
 
     async function fetchPosts() {
         if (loginToken) {
@@ -52,7 +53,7 @@ const App = () => {
     return <BrowserRouter>
     <div>
         <Routes>
-            <Route path="/" element={<><Nav loginToken={loginToken} setLoginToken={setLoginToken} /><Home setPostUser={setPostUser} posts={posts} loginToken={loginToken} fetchPosts={fetchPosts} setTitle={setTitle} setPrice={setPrice} setLocation={setLocation} setDescription={setDescription} setWillDeliver={setWillDeliver} /></>}></Route>
+            <Route path="/" element={<><Nav loginToken={loginToken} setLoginToken={setLoginToken} /><Home setPosts={setPosts} setPostUser={setPostUser} posts={posts} loginToken={loginToken} fetchPosts={fetchPosts} setTitle={setTitle} setPrice={setPrice} setLocation={setLocation} setDescription={setDescription} setWillDeliver={setWillDeliver} /></>}></Route>
             <Route path="/account/login" element={<><Nav /><Login setLoginToken={setLoginToken} loginToken={loginToken} /></>}></Route>
             <Route path="/account/signup" element={<><Nav /><Signup setLoginToken={setLoginToken} loginToken={loginToken} /></>}></Route>
             <Route path="/account/profile" element={<><Nav loginToken={loginToken} setLoginToken={setLoginToken}  /><Profile setPostId={setPostId} postId={postId} loginToken={loginToken} title={title} setTitle={setTitle} description={description} setDescription={setDescription} price={price} setPrice={setPrice} willDeliver={willDeliver} setWillDeliver={setWillDeliver} location={location} setLocation={setLocation} /></>}></Route>

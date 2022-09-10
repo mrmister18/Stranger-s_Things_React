@@ -12,7 +12,11 @@ nav {
     text-align: right;
 }
 
-.post {
+.post, .message {
     margin: 5px;
     border: 2px solid black;
+}
+
+.messageForm {
+    width: 50%;
 }

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const Signup = (props) => {
@@ -22,6 +22,7 @@ const Signup = (props) => {
     }).then(response => response.json())
       .then(result => {
         setLoginToken(result.data.token);
+        navigate('/')
       })
       .catch(console.error);
     }
@@ -30,8 +31,7 @@ const Signup = (props) => {
         <h1>Sign up</h1>
         <form onSubmit={(event) => {
             event.preventDefault()
-        registerNewUser(newUserName, newPassword)
-        loginToken ? navigate("/") : alert("Signup Failed", "Please try again")}}>
+        registerNewUser(newUserName, newPassword)}}>
             <label htmlFor='username'>Username</label>
             <input onChange={(event) => setNewUserName(event.target.value)} id='username' placeholder='username' name='username'type="text"></input>
             <label htmlFor='password'>Password</label>

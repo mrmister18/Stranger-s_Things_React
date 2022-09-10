@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 
 const Message = (props) => {
     const { title, description, postUser, price, location, willDeliver, loginToken, postId } = props;
     const [message, setMessage] = useState("")
     const params = useParams()
+    const navigate = useNavigate()
 
     async function sendMessage() {
         fetch(`https://strangers-things.herokuapp.com/api/2206-ftb-pt-web-pt/posts/${params.postid}/messages`, {
@@ -19,10 +20,8 @@ const Message = (props) => {
     }
   })
 }).then(response => response.json())
-  .then(result => {
-    console.log(result);
-  })
   .catch(console.error);
+  navigate('/')
     }
 
     return <div className="message">
@@ -34,7 +33,7 @@ const Message = (props) => {
         <p>{willDeliver ? "Will Deliver" : "Will not Deliver"}</p>
         <form onSubmit={(event) => {event.preventDefault()
         message ? sendMessage() : alert("Please fill out message form")}}>
-            <input onChange={(event) => {setMessage(event.target.value)}} required></input>
+            <input className='messageForm' onChange={(event) => {setMessage(event.target.value)}} required></input>
             <button>Send Message</button>
         </form>
     </div>
