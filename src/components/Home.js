@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom'
 
 const Home = (props) => {
-    const { loginToken, posts, fetchPosts, setTitle, setDescription, setPrice, setLocation, setWillDeliver, setPostId } = props
+    const { loginToken, posts, fetchPosts, setTitle, setDescription, setPrice, setLocation, setWillDeliver, setPostId, setPostUser } = props
     const navigate = useNavigate()
 
     useEffect(() => {fetchPosts()}, [])
@@ -14,7 +14,6 @@ const Home = (props) => {
         loginToken ? navigate("/addpost") : navigate("/account/login")}}>Add a new post</button>
         {loginToken ? <h1>Logged in</h1> : null}
         {posts.map((post) => {
-            console.log(post.isAuthor)
             return <div className='post' key={post._id}>
                 <h2>{post.title}</h2>
                 <p>{post.description}</p>
@@ -30,7 +29,15 @@ const Home = (props) => {
                   setWillDeliver(post.willDeliver)
                   setPostId(post._id)
                 }}>Edit Post</button></Link> : null}
-                {post.isAuthor ? null : <Link to={`/message/${post._id}`}><button>Message User</button></Link>}
+                {post.isAuthor ? null : <Link to={`/message/${post._id}`}><button onClick={() => {
+                  setTitle(post.title)
+                  setDescription(post.description)
+                  setPrice(post.price)
+                  setLocation(post.location)
+                  setWillDeliver(post.willDeliver)
+                  setPostId(post._id)
+                  setPostUser(post.author.username)
+                }}>Message User</button></Link>}
             </div>
         })}
     </div>

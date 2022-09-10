@@ -37,6 +37,7 @@ headers: {
     return <div className='profile'>
         <h1 className="messages">Messages</h1>
         {messages.length ? messages.map((message) => {
+          console.log(message)
             return <div className="message" key={message._id}>
                 <h2>From: {message.fromUser.username}</h2>
                 <h3>{message.post.title}</h3>

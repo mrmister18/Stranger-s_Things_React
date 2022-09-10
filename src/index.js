@@ -1,7 +1,7 @@
 import { createRoot } from "react-dom/client"
 import { Link, Route, Routes, BrowserRouter, useParams } from "react-router-dom"
 import React, { useState, useEffect } from 'react';
-import { Addpost, Editpost, Home, Login, Profile, Signup } from './components'
+import { Addpost, Editpost, Home, Login, Profile, Signup, Message } from './components'
 
 const Nav = (props) => {
     const { loginToken, setLoginToken } = props
@@ -23,6 +23,7 @@ const App = () => {
     const [location, setLocation] = useState("")
     const [willDeliver, setWillDeliver] = useState(false)
     const [postId, setPostId] = useState("")
+    const [postUser, setPostUser] = useState("")
     const { postid } = useParams()
 
     async function fetchPosts() {
@@ -51,13 +52,13 @@ const App = () => {
     return <BrowserRouter>
     <div>
         <Routes>
-            <Route path="/" element={<><Nav loginToken={loginToken} setLoginToken={setLoginToken} /><Home posts={posts} loginToken={loginToken} fetchPosts={fetchPosts} setTitle={setTitle} setPrice={setPrice} setLocation={setLocation} setDescription={setDescription} setWillDeliver={setWillDeliver} /></>}></Route>
+            <Route path="/" element={<><Nav loginToken={loginToken} setLoginToken={setLoginToken} /><Home setPostUser={setPostUser} posts={posts} loginToken={loginToken} fetchPosts={fetchPosts} setTitle={setTitle} setPrice={setPrice} setLocation={setLocation} setDescription={setDescription} setWillDeliver={setWillDeliver} /></>}></Route>
             <Route path="/account/login" element={<><Nav /><Login setLoginToken={setLoginToken} loginToken={loginToken} /></>}></Route>
             <Route path="/account/signup" element={<><Nav /><Signup setLoginToken={setLoginToken} loginToken={loginToken} /></>}></Route>
             <Route path="/account/profile" element={<><Nav loginToken={loginToken} setLoginToken={setLoginToken}  /><Profile setPostId={setPostId} postId={postId} loginToken={loginToken} title={title} setTitle={setTitle} description={description} setDescription={setDescription} price={price} setPrice={setPrice} willDeliver={willDeliver} setWillDeliver={setWillDeliver} location={location} setLocation={setLocation} /></>}></Route>
             <Route path="/addpost" element={<><Nav loginToken={loginToken} setLoginToken={setLoginToken} /><Addpost fetchPosts={fetchPosts} title={title} setTitle={setTitle} description={description} setDescription={setDescription} price={price} setPrice={setPrice} willDeliver={willDeliver} setWillDeliver={setWillDeliver} location={location} setLocation={setLocation} loginToken={loginToken} /></>}></Route>
             <Route path="/post/:postid" element={<><Nav loginToken={loginToken} setLoginToken={setLoginToken}/><Editpost fetchPosts={fetchPosts} loginToken={loginToken} postId={postId} title={title} setTitle={setTitle} description={description} setDescription={setDescription} price={price} setPrice={setPrice} willDeliver={willDeliver} setWillDeliver={setWillDeliver} location={location} setLocation={setLocation} /></>}></Route>
-            {/* <Route path="/message/:postid" element={<><Nav loginToken={loginToken} setLoginToken={setLoginToken} /><Message /></>}></Route> */}
+            <Route path="/message/:postid" element={<><Nav loginToken={loginToken} setLoginToken={setLoginToken} /><Message postId={postId} loginToken={loginToken} postUser={postUser} title={title} description={description} price={price} location={location} willDeliver={willDeliver} /></>}></Route>
         </Routes>
     </div>
     </BrowserRouter>
